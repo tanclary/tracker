@@ -1,5 +1,8 @@
 import requests
 import json
+import google.auth
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 def detect_text(path):
     # url of the api we're using
     api_url = "https://api.ocr.space/parse/image"
@@ -11,10 +14,10 @@ def detect_text(path):
     results = requests.post(api_url, json)
 
     # results are stored in JSON format
-    json = results.json()
+    jsonResults = results.json()
 
     # get the parsed results from the json
-    parsedResults = json.get('ParsedResults')
+    parsedResults = jsonResults.get('ParsedResults')
 
     # get the actual text of these results (don't worry about this too much
     # the stuff want is just nested deep in the results
@@ -28,6 +31,10 @@ def detect_text(path):
     # "I DON'T THINK THAT MEMES #
     # WHAT YOU THINK IT MEMES"  #
     #############################
+
+def update_values(spreadsheet_id, range_name, value_input_option, _values):
+    creds, _ = google.auth.default()
+
 
 # call our main method with the specified image, right now it's using a web-hosted image
 # instead of a local file, so the "test.jpeg" parameter isn't doing anything.

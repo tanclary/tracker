@@ -1,8 +1,10 @@
 import requests
-import json
 import google.auth
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+
+###############################################################################
+# This is currently the 'main' file which is actually just reading the text   #
+# from an image. Right now, this is just some meme I found on the internet.   #
+###############################################################################
 def detect_text(path):
     # url of the api we're using
     api_url = "https://api.ocr.space/parse/image"
